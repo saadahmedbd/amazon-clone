@@ -1,4 +1,4 @@
-import { cart } from "../data/cart.js"; 
+import { cart,removefromcart} from "../data/cart.js"; 
 //accese to full product detils 
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utilis/money.js";
@@ -30,14 +30,14 @@ cart.forEach((cartItem) =>{
                 <div class="product-price">
                     $${formatCurrency(metchingProduct.priceCents)}
                 </div>
-                <div class="product-quantity">
+                <div class="product-quantity"> 
                   <span>
                     Quantity: <span class="quantity-label">${cartItem.quentity}</span>
                   </span>
                   <span class="update-quantity-link link-primary">
                     Update
                   </span>
-                  <span class="delete-quantity-link link-primary">
+                  <span class="delete-quantity-link link-primary js-delete-link">
                     Delete
                   </span>
                 </div>
@@ -92,3 +92,13 @@ cart.forEach((cartItem) =>{
 });
 document.querySelector('.js-order-summary')
     .innerHTML=cartSummaryHTML;
+
+//delete quentity dom
+document.querySelectorAll('.js-delete-link')
+    .forEach((link) =>{
+        link.addEventListener('click', () =>{
+            const productId =link.dataset.productId;
+            removefromcart(productId);
+            console.log(cart);
+        });
+    });

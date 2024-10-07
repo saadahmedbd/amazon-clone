@@ -1,4 +1,4 @@
-export const cart =[{
+export let cart =[{
     //added cart object in default
     //cart object have two elemnt that is product id and quentity
     productId:"e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -25,3 +25,14 @@ export function addToCart(productId){
           });
       }
    }
+
+export function removefromcart(productId){
+    const newCart =[];
+
+    cart.forEach((cartItem) =>{
+        if(cartItem.productId !== productId){
+            newCart.push(cartItem);
+        }
+    });
+    cart=newCart;
+}
