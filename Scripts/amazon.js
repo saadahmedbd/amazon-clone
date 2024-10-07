@@ -3,38 +3,8 @@
 //2.generate the html
 //3.make it interactive
 
-// create array with object for product infomation
 
-//that comment for my understanding how to store data in js
-/*
-products =[{
-    image :'images/products/athletic-cotton-socks-6-pairs.jpg',
-    name : 'Black and Gray Athletic Cotton Socks - 6 Pairs',
-    rating :{
-        star :4.5,
-        count :87
-    },
-    priceCents:1090
-    
-},{
-    image:'images/products/intermediate-composite-basketball.jpg',
-    name :'Intermediate Size Basketball',
-    rating :{
-        star:4,
-        count:127
-    },
-    priceCents:2095
-},{
-    image:'images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg',
-    name:'Adult sPlain Cotton T-Shirt - 2 Pack',
-    rating :{
-        star :4.5,
-        count:56
-    },
-    priceCents :799
 
-}]; 
-*/
 //get a variable out of a file
 //1.add type ="module" attribute
 //2.export
@@ -42,7 +12,7 @@ products =[{
 //benefit of module
 //1.avoid naming conflict
 //2.modules=better way to organize our code
-import {cart} from '../data/cart.js'; //.. mean it;s outside of javascripts amazon project
+import {cart,addToCart} from '../data/cart.js'; //.. mean it;s outside of javascripts amazon project
 import { products } from '../data/products.js';
 let productHTML =''; 
 products.forEach((product) => {
@@ -97,6 +67,20 @@ products.forEach((product) => {
         </div>`
 
 });
+
+
+ //function of cartquentity increase
+ function cartquentity(){
+    
+  let cartQuentity =0;
+    cart.forEach((item) =>{
+        cartQuentity += item.quentity;
+    });
+
+    //dom for cart quentity
+    document.querySelector('.js-cart-quantity')
+        .innerHTML=cartQuentity;
+ }
 //data attribute syntex data-anyname="product.anyObject" 
 // CREATE RESPONSIBLE TO HTML
 
@@ -116,31 +100,12 @@ document.querySelectorAll('.js-add-to-cart')
             const productId=button.dataset.productId; //product-id attribute  convert to  productName
             
             //if product already exit in cart then increase in product quentity
+            addToCart(productId);
 
-            let metchingItem ;
-            cart.forEach((item) =>{
-                if(productId === item.productId){
-                    metchingItem=item;
-                }
-            });
-            if(metchingItem){
-                metchingItem.quentity += 1;
-            }else{
-                cart.push({
-                    productId :productId,
-                    quentity :1
-                });
-            }
+       
             //add total cart quentity number on the cart menu
+            cartquentity();
 
-            let cartQuentity =0;
-            cart.forEach((item) =>{
-                cartQuentity += item.quentity;
-            });
-
-            //dom for cart quentity
-            document.querySelector('.js-cart-quantity')
-                .innerHTML=cartQuentity;
         
         });
     });
