@@ -14,6 +14,7 @@
 //2.modules=better way to organize our code
 import {cart,addToCart} from '../data/cart.js'; //.. mean it;s outside of javascripts amazon project
 import { products } from '../data/products.js';
+import { formatCurrency } from './utilis/money.js';
 let productHTML =''; 
 products.forEach((product) => {
     productHTML +=` <div class="product-container">
@@ -35,7 +36,7 @@ products.forEach((product) => {
           </div>
 
           <div class="product-price">
-            $${(product.priceCents /100).toFixed(2)}
+            $${formatCurrency(product.priceCents)}
           </div>
 
           <div class="product-quantity-container">

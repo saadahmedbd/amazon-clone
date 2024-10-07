@@ -1,6 +1,7 @@
 import { cart } from "../data/cart.js"; 
 //accese to full product detils 
 import { products } from "../data/products.js";
+import { formatCurrency } from "./utilis/money.js";
 
 let cartSummaryHTML ='';
 cart.forEach((cartItem) =>{
@@ -27,11 +28,11 @@ cart.forEach((cartItem) =>{
                   ${metchingProduct.name}
                 </div>
                 <div class="product-price">
-                    $${metchingProduct.priceCents/ 100}
+                    $${formatCurrency(metchingProduct.priceCents)}
                 </div>
                 <div class="product-quantity">
                   <span>
-                    Quantity: <span class="quantity-label">${cartItem.quantity}</span>
+                    Quantity: <span class="quantity-label">${cartItem.quentity}</span>
                   </span>
                   <span class="update-quantity-link link-primary">
                     Update
@@ -49,7 +50,7 @@ cart.forEach((cartItem) =>{
                 <div class="delivery-option">
                   <input type="radio" checked
                     class="delivery-option-input"
-                    name="delivery-option-1">
+                    name="delivery-option-${metchingProduct.id}">
                   <div>
                     <div class="delivery-option-date">
                       Tuesday, June 21
@@ -62,7 +63,7 @@ cart.forEach((cartItem) =>{
                 <div class="delivery-option">
                   <input type="radio"
                     class="delivery-option-input"
-                    name="delivery-option-1">
+                    name="delivery-option-${metchingProduct.id}">
                   <div>
                     <div class="delivery-option-date">
                       Wednesday, June 15
@@ -75,7 +76,7 @@ cart.forEach((cartItem) =>{
                 <div class="delivery-option">
                   <input type="radio"
                     class="delivery-option-input"
-                    name="delivery-option-1">
+                    name="delivery-option-${metchingProduct.id}">
                   <div>
                     <div class="delivery-option-date">
                       Monday, June 13
