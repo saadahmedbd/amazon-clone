@@ -35,6 +35,14 @@ products =[{
 
 }]; 
 */
+//get a variable out of a file
+//1.add type ="module" attribute
+//2.export
+//3.import
+//benefit of module
+//1.avoid naming conflict
+//2.modules=better way to organize our code
+import {cart} from '../data/cart.js'; //.. mean it;s outside of javascripts amazon project
 let productHTML ='';
 products.forEach((product) => {
     productHTML +=` <div class="product-container">
