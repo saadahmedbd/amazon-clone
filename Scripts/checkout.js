@@ -4,17 +4,21 @@ import { products } from "../data/products.js";
 import { formatCurrency } from "./utilis/money.js";
 
 let cartSummaryHTML ='';
+
 cart.forEach((cartItem) =>{
     const productId=cartItem.productId;
     //generate all product information to productdata 
 
     let metchingProduct;
+
     products.forEach((product) =>{
         if(product.id === productId){
             metchingProduct=product;
         }
     });
-    cartSummaryHTML +=`<div class="cart-item-container">
+    cartSummaryHTML +=`
+    <div class="cart-item-container 
+      js-cart-item-container-${metchingProduct.id}">
             <div class="delivery-date">
               Delivery date: Tuesday, June 21
             </div>
@@ -93,12 +97,16 @@ cart.forEach((cartItem) =>{
 document.querySelector('.js-order-summary')
     .innerHTML=cartSummaryHTML;
 
-//delete quentity dom
+//delete product dom
 document.querySelectorAll('.js-delete-link')
     .forEach((link) =>{
         link.addEventListener('click', () =>{
             const productId =link.dataset.productId;
             removefromcart(productId);
-            console.log(cart);
+            
+            const container =document.querySelector(
+                `.js-cart-item-container-${productId}`
+            );
+            container.remove();
         });
     });

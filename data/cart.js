@@ -1,12 +1,27 @@
-export let cart =[{
-    //added cart object in default
-    //cart object have two elemnt that is product id and quentity
-    productId:"e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
-    quentity:2
-},{
-    productId:"15b6fc6f-327a-4ec4-896f-486349e85a3d",
-    quentity:1
-}]; 
+export let cart = JSON.parse(localStorage.getItem('cart')); //perse convert to string cart value add in local storage
+
+//i face a problem that is 
+//when I added a element in cart then cart will be updated but 
+//when I click cart cart did not sawing product.problem(1)
+// delete button did not work.problem(2) 
+if (!cart){
+    cart=[{
+        //added cart object in default
+        //cart object have two elemnt that is product id and quentity
+        productId:"e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+        quentity:2
+    },{
+        productId:"15b6fc6f-327a-4ec4-896f-486349e85a3d",
+        quentity:1
+    }]; 
+}
+
+
+//save local storage
+function saveToStorage(){
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
 
 //function of cartquentity
 export function addToCart(productId){
@@ -24,8 +39,11 @@ export function addToCart(productId){
               quentity :1
           });
       }
+      saveToStorage();
    }
+  
 
+   //remove product function
 export function removefromcart(productId){
     const newCart =[];
 
@@ -35,4 +53,6 @@ export function removefromcart(productId){
         }
     });
     cart=newCart;
+
+    saveToStorage();
 }
